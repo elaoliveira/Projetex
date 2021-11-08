@@ -13,7 +13,7 @@ export class AuthService {
   constructor( private http: HttpClient) { }
 
   entrar(userLogin: UserLogin): Observable<UserLogin>{
-    return this.http.post<UserLogin>("https://projetinblogpessoal.herokuapp.com/usuarios/cadastrar", userLogin)
+    return this.http.post<UserLogin>("https://projetinblogpessoal.herokuapp.com/usuarios/logar", userLogin)
   }
 
   cadastrar(usuario: Usuario): Observable<Usuario>{
