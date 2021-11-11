@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row bg-dark d-flex justify-content-center">
+  <div class="row bg-dark text-white align-items-center">
     <div class="col-md-6">
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 text-white">
@@ -64,7 +64,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <a
-          class="nav-link text-secondary font-weight-bold"
+          class="nav-link  text-secondary font-weight-bold"
           id="postagensTema-tab"
           data-toggle="tab"
           href="#postagensTema"
@@ -128,16 +128,17 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="titulo">Título</label>
-          <input type="text" placeholder="titulo" class="form-control mb-2">
-          <textarea name="" id="" placeholder="Texto" cols="30" rows="3" class="form-control"></textarea>
+          <input [(ngModel)]='postagem.titulo' type="text" placeholder="Digite o titulo" class="form-control mb-2">
+          <label for="texto">Texto</label>
+          <textarea [(ngModel)]='postagem.texto' name="" id="" placeholder="Texto" cols="30" rows="3" class="form-control"></textarea>
           <p>Escolha um tema ou <a routerLink="/tema" data-dismiss="modal">cadastre um novo</a></p>
-          <select name="" id="" class="form-control">
-            <option value="">Digite um tema</option>
+          <select name="" id="" class="form-control" [(ngModel)]='idTema' (change)='findByIdTema()'>
+            <option *ngFor='let item of listaTemas' value="{{item.id}}">{{item.descricao}}</option>
           </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success">Publicar</button>
+          <button type="button" class="btn btn-success" (click)='publicar()'data-dismiss="modal">Publicar</button>
         </div>
       </div>
     </div>
