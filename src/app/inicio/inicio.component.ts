@@ -16,6 +16,7 @@ import { TemaService } from '../service/tema.service';
 export class InicioComponent implements OnInit {
 
   postagem: Postagem = new Postagem()
+  listaPostagens: Postagem[]
   
   tema: Tema = new Tema()
   listaTemas: Tema[]
@@ -28,7 +29,7 @@ export class InicioComponent implements OnInit {
     private router: Router,
     private postagemService: PostagemService,
     private temaService: TemaService,
-    private auth: AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit(){
@@ -38,7 +39,7 @@ export class InicioComponent implements OnInit {
     }
 
     this.getAllTemas()
-  
+    this.getAllPostagens()
 
   }
 
@@ -55,6 +56,18 @@ export class InicioComponent implements OnInit {
     })
   }
 
+  getAllPostagens(){
+    this.postagemService.getAllPostagens().subscribe((resp: Postagem[]) =>{
+      this.listaPostagens = resp
+    })
+  }
+
+  findByIdUsuario(){
+    this.authService.getByIdUsuario(this.idUsuario).subscribe((resp: Usuario) =>{
+      this.usuario = resp
+    })
+  }
+
   publicar(){
     this.tema.id = this.idTema
     this.postagem.tema = this.tema
@@ -66,6 +79,7 @@ export class InicioComponent implements OnInit {
       this.postagem = resp
       alert('Postagem realizada com sucesso!')
       this.postagem = new Postagem()
+      this.getAllPostagens()
     })
   }
 
