@@ -65,6 +65,7 @@ export class InicioComponent implements OnInit {
   findByIdUsuario(){
     this.authService.getByIdUsuario(this.idUsuario).subscribe((resp: Usuario) =>{
       this.usuario = resp
+      console.log(this.usuario)
     })
   }
 
@@ -75,12 +76,15 @@ export class InicioComponent implements OnInit {
     this.usuario.id = this.idUsuario
     this.postagem.usuario = this.usuario
 
+    console.log(this.postagem)
+
     this.postagemService.postPostagem(this.postagem).subscribe((resp: Postagem) => {
       this.postagem = resp
       alert('Postagem realizada com sucesso!')
       this.postagem = new Postagem()
       this.getAllPostagens()
     })
+
   }
 
 }
