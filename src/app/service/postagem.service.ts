@@ -34,4 +34,10 @@ export class PostagemService {
   deletePostagem(id: number){
     return this.http.delete(`https://projetinblogpessoal.herokuapp.com/postagem/${id}`, this.token)
   }
+
+  refreshToken(){
+    this.token = {
+      headers: new HttpHeaders().set('Authorization', environment.token)
+    }
+  }
 }

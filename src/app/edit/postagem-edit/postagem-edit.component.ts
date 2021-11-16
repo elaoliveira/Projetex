@@ -52,6 +52,7 @@ export class PostagemEditComponent implements OnInit {
 
   findAllTemas(){
     this.temaService.getAllTema().subscribe((resp: Tema[]) =>{
+      this.listaTemas = resp
 
     })
   }
@@ -59,7 +60,6 @@ export class PostagemEditComponent implements OnInit {
   atualizar(){
     this.tema.id = this.idTema
     this.postagem.tema = this.tema
-
     this.postagemService.putPostagem(this.postagem).subscribe((resp: Postagem) =>{
       this.postagem = resp
       alert('Postagem atualizada com sucesso!')
